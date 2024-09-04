@@ -32,6 +32,12 @@ public: // Body
 
 	UPROPERTY(EditAnywhere, Category = "CelestialBody")
 	double RotatingSpeed = 60.0;
+
+	UPROPERTY(EditAnywhere, Category = "CelestialBody")
+	bool bMID= false;
+
+	UPROPERTY(EditAnywhere, Category = "CelestialBody")
+	bool bCalculateStarLightDirection = false;
 	
 public: //Cloud
 	UPROPERTY(EditAnywhere, Category = "CelestialBody|Cloud")

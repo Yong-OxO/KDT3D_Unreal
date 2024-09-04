@@ -50,6 +50,12 @@ void ACelestialBody::UpdateDataAsset()
 	Body->SetMaterial(0, CelestialBodyData->BodyMaterial);
 	Body->SetRelativeScale3D(CelestialBodyData->BodyScale3D);
 	
+	if (CelestialBodyData->BodyMaterial && CelestialBodyData->bMID)
+	{
+		BodyMID = Body->CreateDynamicMaterialInstance(0);
+	}
+
+	// Cloud, Atmosphere
 	if (CelestialBodyData->bCloud && Cloud == nullptr)
 	{
 		Cloud = NewObject<UStaticMeshComponent>(this, TEXT("Cloud"));

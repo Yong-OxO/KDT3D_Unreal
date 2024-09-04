@@ -38,13 +38,20 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Body;
 
+	UPROPERTY() // Optinal
+	UMaterialInstanceDynamic* BodyMID = nullptr;
+
 protected: // Optinal
 	UPROPERTY()
 	UMaterialInstanceDynamic* BodyMID = nullptr;
 
-protected:
+protected: // Optinal
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Cloud;
+
+protected:
+	UPROPERTY(Transient)
+	class AStar* ChachedStar = nullptr;
 
 protected:
 #if WITH_EDITOR
@@ -54,7 +61,6 @@ protected:
 protected:
 	UPROPERTY(Category = "CelestialBody", EditAnywhere)
 	UCelestialBodyDataAsset* CelestialBodyData;
-
 	FDelegateHandle CelestialBodyDataUpdateHandle;
 
 
