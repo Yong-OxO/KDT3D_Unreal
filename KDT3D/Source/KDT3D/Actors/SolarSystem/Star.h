@@ -7,9 +7,8 @@
 #include "Components/TimelineComponent.h"
 #include "Star.generated.h"
 
-/**
- * 
- */
+DECLARE_MULTICAST_DELEGATE(FOnStarDataAssetChanged)
+
 UCLASS()
 class KDT3D_API AStar : public ACelestialBody
 {
@@ -17,6 +16,9 @@ class KDT3D_API AStar : public ACelestialBody
 
 public:
 	AStar();
+#if WITH_EDITOR
+	FOnStarDataAssetChanged OnStarDataAssetChanged;
+#endif
 
 protected:
 	virtual void UpdateDataAsset() override;
@@ -29,6 +31,9 @@ protected:
 protected:
 	UPROPERTY()
 	class UStarDataAsset* StarBodyData;
+
+	UPROPERTY()
+	class UPointLightComponent* PointLight;
 
 	UPROPERTY()
 	UTimelineComponent* StarEmissivePowerTimelineComponent;

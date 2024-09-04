@@ -4,18 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Data/CelestialBodyDataAsset.h"
 #include "CelestialBody.generated.h"
+
+
+class AStar;
+class UCelestialBodyDataAsset;
 
 UCLASS()
 class KDT3D_API ACelestialBody : public AActor
 {
 	GENERATED_BODY()
-	
+
 public:	
 	ACelestialBody();
 
 	double GetOrbitalSpeed() const { return CelestialBodyData ? CelestialBodyData->OrbitalSpeed : 0.0; }
+	void SetCelestialBodyData(UCelestialBodyDataAsset* InData);
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void OnConstruction(const FTransform& Transform) override;
@@ -23,9 +28,13 @@ protected:
 
 	void OnCelestialBodyDataChanged();
 	virtual void UpdateDataAsset();
+
+	void CalculateStarLightDirection();
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	FVector GetBodyWorldLocation() const { return Body->GetComponentLocation(); }
 
 protected:
 	// 공전축
@@ -38,9 +47,6 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Body;
 
-	UPROPERTY() // Optinal
-	UMaterialInstanceDynamic* BodyMID = nullptr;
-
 protected: // Optinal
 	UPROPERTY()
 	UMaterialInstanceDynamic* BodyMID = nullptr;
@@ -51,7 +57,7 @@ protected: // Optinal
 
 protected:
 	UPROPERTY(Transient)
-	class AStar* ChachedStar = nullptr;
+	AStar* ChachedStar = nullptr;
 
 protected:
 #if WITH_EDITOR

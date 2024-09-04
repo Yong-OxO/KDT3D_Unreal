@@ -21,6 +21,13 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Star")
 	float PlayRate = 1.f;
 
+	UPROPERTY(EditAnywhere, Category = "Star|Light", meta = (UIMin = "8.0", UIMax = "16384.0"))
+	float LightAttenuationRadius = 1000.f;
+	UPROPERTY(EditAnywhere, Category = "Star|Light", meta = (UIMin = "0.0", UIMax = "20.0"))
+	float LightIntensity = 10.f;
 
+#if WITH_EDITOR
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
 	
 };

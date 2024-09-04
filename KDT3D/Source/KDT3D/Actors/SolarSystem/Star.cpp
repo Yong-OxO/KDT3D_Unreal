@@ -3,9 +3,16 @@
 
 #include "Actors/SolarSystem/Star.h"
 #include "Actors/SolarSystem/Data/StarDataAsset.h"
+#include "Components/PointLightComponent.h"
+
 
 AStar::AStar()
 {
+	PointLight = CreateDefaultSubobject<UPointLightComponent>(TEXT("PointLight"));
+	PointLight->SetupAttachment(Body);
+	PointLight->Intensity = 10.f;
+	PointLight->bUseInverseSquaredFalloff = false;
+
 	StarEmissivePowerTimelineComponent = CreateDefaultSubobject<UTimelineComponent>(TEXT("StarEmissivePowerTimelineComponent"));
 	StarEmissivePowerTimelineComponent->SetLooping(true);
 }
@@ -16,6 +23,9 @@ void AStar::UpdateDataAsset()
 
 	StarBodyData = Cast<UStarDataAsset>(CelestialBodyData);
 	if (!StarBodyData) { return; }
+
+	PointLight->Intensity = StarBodyData->LightIntensity;
+	PointLight->AttenuationRadius = StarBodyData->LightAttenuationRadius;
 
 	if (StarBodyData->StarEmissivePowerCurve)
 	{
@@ -37,6 +47,10 @@ void AStar::UpdateDataAsset()
 	StarEmissivePowerTimelineComponent->SetPlayRate(StarBodyData->PlayRate);
 
 	MID = Body->CreateDynamicMaterialInstance(0);
+
+#if WITH_EDITOR
+	OnStarDataAssetChanged.Broadcast();
+#endif
 }
 
 void AStar::BeginPlay()
