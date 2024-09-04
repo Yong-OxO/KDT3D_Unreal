@@ -2,7 +2,7 @@
 #include "Actors/SolarSystem/Star.h"
 #include "Kismet/GameplayStatics.h"
 #include "Data/CelestialBodyDataAsset.h"
-#include "Star.h"
+#include "Actors/SolarSystem/Star.h"
 
 
 // Sets default values
@@ -18,6 +18,11 @@ ACelestialBody::ACelestialBody()
 
 	Body = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Body"));
 	Body->SetupAttachment(RotatingAxis);
+}
+
+double ACelestialBody::GetOrbitalSpeed() const
+{
+	return CelestialBodyData ? CelestialBodyData->OrbitalSpeed : 0.0;
 }
 
 void ACelestialBody::SetCelestialBodyData(UCelestialBodyDataAsset* InData)
@@ -38,7 +43,9 @@ void ACelestialBody::OnConstruction(const FTransform& Transform)
 
 	if (CelestialBodyData)
 	{
+#if WITH_EDITOR
 		CelestialBodyDataUpdateHandle = CelestialBodyData->OnCelestialBodyDataAssetChanged.AddUObject(this, &ThisClass::OnCelestialBodyDataChanged);
+#endif
 		UpdateDataAsset();
 	}
 }

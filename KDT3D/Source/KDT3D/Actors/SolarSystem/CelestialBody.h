@@ -6,9 +6,9 @@
 #include "GameFramework/Actor.h"
 #include "CelestialBody.generated.h"
 
-
 class AStar;
 class UCelestialBodyDataAsset;
+
 
 UCLASS()
 class KDT3D_API ACelestialBody : public AActor
@@ -18,7 +18,7 @@ class KDT3D_API ACelestialBody : public AActor
 public:	
 	ACelestialBody();
 
-	double GetOrbitalSpeed() const { return CelestialBodyData ? CelestialBodyData->OrbitalSpeed : 0.0; }
+	double GetOrbitalSpeed() const;
 	void SetCelestialBodyData(UCelestialBodyDataAsset* InData);
 
 protected:
@@ -68,6 +68,4 @@ protected:
 	UPROPERTY(Category = "CelestialBody", EditAnywhere)
 	UCelestialBodyDataAsset* CelestialBodyData;
 	FDelegateHandle CelestialBodyDataUpdateHandle;
-
-
 };

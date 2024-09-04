@@ -5,6 +5,8 @@
 #include "Planet.h"
 #include "Star.h"
 #include "Data/StarDataAsset.h"
+#include "Data/CelestialBodyDataAsset.h"
+
 
 
 // Sets default values

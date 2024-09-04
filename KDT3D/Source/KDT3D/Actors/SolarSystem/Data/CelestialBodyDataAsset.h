@@ -8,9 +8,7 @@
 
 DECLARE_MULTICAST_DELEGATE(FOnCelestialBodyDataAssetChanged)
 
-/**
- * 
- */
+
 UCLASS()
 class KDT3D_API UCelestialBodyDataAsset : public UDataAsset
 {

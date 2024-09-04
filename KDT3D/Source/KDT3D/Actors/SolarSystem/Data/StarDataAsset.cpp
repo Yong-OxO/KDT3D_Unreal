@@ -3,6 +3,7 @@
 
 #include "Actors/SolarSystem/Data/StarDataAsset.h"
 
+#if WITH_EDITOR
 void UStarDataAsset::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
@@ -27,3 +28,4 @@ void UStarDataAsset::PostEditChangeProperty(FPropertyChangedEvent& PropertyChang
 		}
 	}
 }
+#endif

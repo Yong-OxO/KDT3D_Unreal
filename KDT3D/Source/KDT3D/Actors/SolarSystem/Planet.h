@@ -24,10 +24,9 @@ protected:
 #if WITH_EDITOR
 	virtual void PreEditChange(FProperty* PropertyAboutToChange) override;
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
-
-	TArray<ACelestialBody*> PrevMoons;
 #endif
 
+	TArray<ACelestialBody*> PrevMoons;
 protected:
 	ACelestialBody* AddMoon(ACelestialBody* InTemplate = nullptr);
 

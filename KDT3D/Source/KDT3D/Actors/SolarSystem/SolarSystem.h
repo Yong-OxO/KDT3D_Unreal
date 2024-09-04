@@ -6,16 +6,14 @@
 #include "GameFramework/Actor.h"
 #include "SolarSystem.generated.h"
 
-
+class UStarDataAsset;
+class APlanet;
 
 UCLASS()
 class KDT3D_API ASolarSystem : public AActor
 {
 	GENERATED_BODY()
 public:
-	class UStarDataAsset;
-	class APlanet;
-
 	ASolarSystem();
 
 protected:

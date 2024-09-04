@@ -29,7 +29,7 @@ void APlanet::Destroyed()
 	}
 #endif
 }
-
+#if WITH_EDITOR
 void APlanet::PreEditChange(FProperty* PropertyAboutToChange)
 {
 	Super::PreEditChange(PropertyAboutToChange);
@@ -96,6 +96,7 @@ void APlanet::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent
 
 
 }
+#endif
 
 ACelestialBody* APlanet::AddMoon(ACelestialBody* InTemplate)
 {
