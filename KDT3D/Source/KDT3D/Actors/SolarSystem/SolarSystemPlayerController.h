@@ -27,9 +27,9 @@ private:
 	TObjectPtr<UInputMappingContext> MappingContext;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
-	TObjectPtr<UInputAction> LClick;
+	TObjectPtr<UInputAction> StartAction;
 
 private:
-
-	void LClick(bool bWidget);
+	UFUNCTION()
+	void StartGame();
 };
